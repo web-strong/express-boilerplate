@@ -33,7 +33,8 @@ function readRoutesDirectory(dirpath){
             }
 
             if(typeof routemodule === 'function'){
-                let mountpath = filemount === 'index' ? '/' : `/${filemount}`;
+                let rootmount = dirpath.slice(routesPath.length).replace(/\\/ig,'/');
+                let mountpath = filemount === 'index' ? `${rootmount}/` : `${rootmount}/${filemount}`;
                 process.stdout.write(`mount file ${filemount}.${extention} on path ${mountpath}, module path ${filemodule} \n`);
                 router.use( mountpath,routemodule );
             }
